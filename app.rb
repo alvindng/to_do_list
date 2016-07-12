@@ -19,5 +19,13 @@ post('/lists') do
   name = params.fetch('name')
   list = List.new({:name => name, :id => nil})
   list.save()
+  @tasks = Task.all()
+  erb(:index)
+end
+
+post('/tasks') do
+  description = params.fetch('description')
+  task = Task.new({:description => description})
+  task.save()
   erb(:success)
 end
